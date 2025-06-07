@@ -7,8 +7,8 @@ services:
     init: true
     cap_drop:
       - ALL
-    security_opt:
-      - no-new-privileges:true
+        #security_opt:
+        #- no-new-privileges:true
     env_file:
       - ../.env
     ports:
@@ -36,8 +36,8 @@ services:
       - FOWNER
       - SETGID
       - SETUID
-    security_opt:
-      - no-new-privileges:true
+        #security_opt:
+        #- no-new-privileges:true
     env_file:
       - ../.env
     healthcheck:
@@ -56,8 +56,8 @@ services:
     user: '999:1000'
     cap_drop:
       - ALL
-    security_opt:
-      - no-new-privileges:true
+        #security_opt:
+        #- no-new-privileges:true
     env_file:
       - ../.env
     command:
