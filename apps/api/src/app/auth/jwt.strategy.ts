@@ -46,7 +46,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
             countriesAndTimezones.getCountryForTimezone(timezone)?.id;
 
           await this.prismaService.analytics.upsert({
-            create: { country, User: { connect: { id: user.id } } },
+            create: { country, user: { connect: { id: user.id } } },
             update: {
               country,
               activityCount: { increment: 1 },
@@ -56,12 +56,12 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
           });
         }
 
-        if (!user.Settings.settings.baseCurrency) {
-          user.Settings.settings.baseCurrency = DEFAULT_CURRENCY;
+        if (!user.settings.settings.baseCurrency) {
+          user.settings.settings.baseCurrency = DEFAULT_CURRENCY;
         }
 
-        if (!user.Settings.settings.language) {
-          user.Settings.settings.language = DEFAULT_LANGUAGE_CODE;
+        if (!user.settings.settings.language) {
+          user.settings.settings.language = DEFAULT_LANGUAGE_CODE;
         }
 
         return user;

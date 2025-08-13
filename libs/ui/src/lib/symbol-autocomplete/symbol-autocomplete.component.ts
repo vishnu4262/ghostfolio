@@ -1,8 +1,6 @@
 import { GfSymbolModule } from '@ghostfolio/client/pipes/symbol/symbol.module';
 import { DataService } from '@ghostfolio/client/services/data.service';
 import { LookupItem } from '@ghostfolio/common/interfaces';
-import { translate } from '@ghostfolio/ui/i18n';
-import { AbstractMatFormField } from '@ghostfolio/ui/shared/abstract-mat-form-field';
 
 import { FocusMonitor } from '@angular/cdk/a11y';
 import {
@@ -10,10 +8,13 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  DoCheck,
   ElementRef,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
+  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import {
@@ -43,7 +44,9 @@ import {
   takeUntil
 } from 'rxjs/operators';
 
+import { translate } from '../i18n';
 import { GfPremiumIndicatorComponent } from '../premium-indicator';
+import { AbstractMatFormField } from '../shared/abstract-mat-form-field';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -74,7 +77,7 @@ import { GfPremiumIndicatorComponent } from '../premium-indicator';
 })
 export class GfSymbolAutocompleteComponent
   extends AbstractMatFormField<LookupItem>
-  implements OnInit, OnDestroy
+  implements DoCheck, OnChanges, OnDestroy, OnInit
 {
   @Input() public defaultLookupItems: LookupItem[] = [];
   @Input() public isLoading = false;
@@ -105,10 +108,6 @@ export class GfSymbolAutocompleteComponent
   public ngOnInit() {
     if (this.disabled) {
       this.control.disable();
-    }
-
-    if (this.defaultLookupItems?.length) {
-      this.showDefaultOptions();
     }
 
     this.control.valueChanges
@@ -157,6 +156,12 @@ export class GfSymbolAutocompleteComponent
 
         this.changeDetectorRef.markForCheck();
       });
+  }
+
+  public ngOnChanges(changes: SimpleChanges) {
+    if (changes['defaultLookupItems'] && this.defaultLookupItems?.length) {
+      this.showDefaultOptions();
+    }
   }
 
   public displayFn(aLookupItem: LookupItem) {

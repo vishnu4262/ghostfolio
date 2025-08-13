@@ -6,10 +6,10 @@ import { UserSettings } from '@ghostfolio/common/interfaces';
 
 export class EmergencyFundSetup extends Rule<Settings> {
   private emergencyFund: number;
-  private i18nService = new I18nService();
 
   public constructor(
     protected exchangeRateDataService: ExchangeRateDataService,
+    private i18nService: I18nService,
     languageCode: string,
     emergencyFund: number
   ) {
@@ -39,6 +39,13 @@ export class EmergencyFundSetup extends Rule<Settings> {
       }),
       value: true
     };
+  }
+
+  public getCategoryName() {
+    return this.i18nService.getTranslation({
+      id: 'rule.emergencyFund.category',
+      languageCode: this.getLanguageCode()
+    });
   }
 
   public getConfiguration() {

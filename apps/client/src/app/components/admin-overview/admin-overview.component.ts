@@ -12,6 +12,7 @@ import {
   PROPERTY_SYSTEM_MESSAGE,
   ghostfolioPrefix
 } from '@ghostfolio/common/config';
+import { getDateFnsLocale } from '@ghostfolio/common/helper';
 import {
   Coupon,
   InfoItem,
@@ -19,26 +20,60 @@ import {
   User
 } from '@ghostfolio/common/interfaces';
 import { hasPermission, permissions } from '@ghostfolio/common/permissions';
+import { GfValueComponent } from '@ghostfolio/ui/value';
 
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSelectModule } from '@angular/material/select';
 import {
+  MatSlideToggleChange,
+  MatSlideToggleModule
+} from '@angular/material/slide-toggle';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { RouterModule } from '@angular/router';
+import { IonIcon } from '@ionic/angular/standalone';
+import {
+  addMilliseconds,
   differenceInSeconds,
   formatDistanceToNowStrict,
   parseISO
 } from 'date-fns';
+import { addIcons } from 'ionicons';
+import {
+  closeCircleOutline,
+  ellipsisHorizontal,
+  informationCircleOutline,
+  syncOutline,
+  trashOutline
+} from 'ionicons/icons';
 import ms, { StringValue } from 'ms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
+  imports: [
+    CommonModule,
+    FormsModule,
+    GfValueComponent,
+    IonIcon,
+    MatButtonModule,
+    MatCardModule,
+    MatMenuModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule,
+    RouterModule
+  ],
   selector: 'gf-admin-overview',
   styleUrls: ['./admin-overview.scss'],
-  templateUrl: './admin-overview.html',
-  standalone: false
+  templateUrl: './admin-overview.html'
 })
-export class AdminOverviewComponent implements OnDestroy, OnInit {
+export class GfAdminOverviewComponent implements OnDestroy, OnInit {
   public couponDuration: StringValue = '14 days';
   public coupons: Coupon[];
   public hasPermissionForSubscription: boolean;
@@ -94,6 +129,14 @@ export class AdminOverviewComponent implements OnDestroy, OnInit {
           );
         }
       });
+
+    addIcons({
+      closeCircleOutline,
+      ellipsisHorizontal,
+      informationCircleOutline,
+      syncOutline,
+      trashOutline
+    });
   }
 
   public ngOnInit() {
@@ -113,6 +156,15 @@ export class AdminOverviewComponent implements OnDestroy, OnInit {
     }
 
     return '';
+  }
+
+  public formatStringValue(aStringValue: StringValue) {
+    return formatDistanceToNowStrict(
+      addMilliseconds(new Date(), ms(aStringValue)),
+      {
+        locale: getDateFnsLocale(this.user?.settings?.language)
+      }
+    );
   }
 
   public onAddCoupon() {

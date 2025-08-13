@@ -1,10 +1,11 @@
 import { DEFAULT_LANGUAGE_CODE } from '@ghostfolio/common/config';
 
-import { Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import * as cheerio from 'cheerio';
 import { readFileSync, readdirSync } from 'fs';
 import { join } from 'path';
 
+@Injectable()
 export class I18nService {
   private localesPath = join(__dirname, 'assets', 'locales');
   private translations: { [locale: string]: cheerio.CheerioAPI } = {};
@@ -42,7 +43,7 @@ export class I18nService {
 
     if (placeholders) {
       for (const [key, value] of Object.entries(placeholders)) {
-        translatedText = translatedText.replace(`{${key}}`, String(value));
+        translatedText = translatedText.replace(`\${${key}}`, String(value));
       }
     }
 

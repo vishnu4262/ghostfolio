@@ -25,7 +25,7 @@
 
 ## Ghostfolio Premium
 
-Our official **[Ghostfolio Premium](https://ghostfol.io/en/pricing)** cloud offering is the easiest way to get started. Due to the time it saves, this will be the best option for most people. Revenue is used to cover the costs of the hosting infrastructure and to fund ongoing development.
+Our official **[Ghostfolio Premium](https://ghostfol.io/en/pricing)** cloud offering is the easiest way to get started. Due to the time it saves, this will be the best option for most people. Revenue is used to cover operational costs for the hosting infrastructure and professional data providers, and to fund ongoing development.
 
 If you prefer to run Ghostfolio on your own infrastructure, please find further instructions in the [Self-hosting](#self-hosting) section.
 
@@ -138,7 +138,6 @@ docker compose -f docker/docker-compose.build.yml up -d
 #### Upgrade Version
 
 1. Update the _Ghostfolio_ Docker image
-
    - Increase the version of the `ghostfolio/ghostfolio` Docker image in `docker/docker-compose.yml`
    - Run the following command if `ghostfolio:latest` is set:
      ```bash
@@ -222,18 +221,18 @@ Deprecated: `GET http://localhost:3333/api/v1/auth/anonymous/<INSERT_SECURITY_TO
 }
 ```
 
-| Field        | Type                | Description                                                                   |
-| ------------ | ------------------- | ----------------------------------------------------------------------------- |
-| `accountId`  | `string` (optional) | Id of the account                                                             |
-| `comment`    | `string` (optional) | Comment of the activity                                                       |
-| `currency`   | `string`            | `CHF` \| `EUR` \| `USD` etc.                                                  |
-| `dataSource` | `string`            | `COINGECKO` \| `MANUAL` (for type `ITEM`) \| `YAHOO`                          |
-| `date`       | `string`            | Date in the format `ISO-8601`                                                 |
-| `fee`        | `number`            | Fee of the activity                                                           |
-| `quantity`   | `number`            | Quantity of the activity                                                      |
-| `symbol`     | `string`            | Symbol of the activity (suitable for `dataSource`)                            |
-| `type`       | `string`            | `BUY` \| `DIVIDEND` \| `FEE` \| `INTEREST` \| `ITEM` \| `LIABILITY` \| `SELL` |
-| `unitPrice`  | `number`            | Price per unit of the activity                                                |
+| Field        | Type                | Description                                                         |
+| ------------ | ------------------- | ------------------------------------------------------------------- |
+| `accountId`  | `string` (optional) | Id of the account                                                   |
+| `comment`    | `string` (optional) | Comment of the activity                                             |
+| `currency`   | `string`            | `CHF` \| `EUR` \| `USD` etc.                                        |
+| `dataSource` | `string`            | `COINGECKO` \| `MANUAL` \| `YAHOO`                                  |
+| `date`       | `string`            | Date in the format `ISO-8601`                                       |
+| `fee`        | `number`            | Fee of the activity                                                 |
+| `quantity`   | `number`            | Quantity of the activity                                            |
+| `symbol`     | `string`            | Symbol of the activity (suitable for `dataSource`)                  |
+| `type`       | `string`            | `BUY` \| `DIVIDEND` \| `FEE` \| `INTEREST` \| `LIABILITY` \| `SELL` |
+| `unitPrice`  | `number`            | Price per unit of the activity                                      |
 
 #### Response
 
@@ -296,7 +295,7 @@ Are you building your own project? Add the `ghostfolio` topic to your _GitHub_ r
 
 Ghostfolio is **100% free** and **open source**. We encourage and support an active and healthy community that accepts contributions from the public - including you.
 
-Not sure what to work on? We have [some ideas](https://github.com/ghostfolio/ghostfolio/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22), even for [newcomers](https://github.com/ghostfolio/ghostfolio/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22). Please join the Ghostfolio [Slack](https://join.slack.com/t/ghostfolio/shared_invite/zt-vsaan64h-F_I0fEo5M0P88lP9ibCxFg) channel or post to [@ghostfolio\_](https://x.com/ghostfolio_) on _X_. We would love to hear from you.
+Not sure what to work on? We have [some ideas](https://github.com/ghostfolio/ghostfolio/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22%20no%3Aassignee), even for [newcomers](https://github.com/ghostfolio/ghostfolio/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22%20no%3Aassignee). Please join the Ghostfolio [Slack](https://join.slack.com/t/ghostfolio/shared_invite/zt-vsaan64h-F_I0fEo5M0P88lP9ibCxFg) channel or post to [@ghostfolio\_](https://x.com/ghostfolio_) on _X_. We would love to hear from you.
 
 If you like to support this project, get [**Ghostfolio Premium**](https://ghostfol.io/en/pricing) or [**Buy me a coffee**](https://www.buymeacoffee.com/ghostfolio).
 
