@@ -106,23 +106,17 @@ const routes: Routes = [
   {
     path: publicRoutes.pricing.path,
     loadChildren: () =>
-      import('./pages/pricing/pricing-page.module').then(
-        (m) => m.PricingPageModule
-      )
+      import('./pages/pricing/pricing-page.routes').then((m) => m.routes)
   },
   {
     path: publicRoutes.public.path,
     loadChildren: () =>
-      import('./pages/public/public-page.module').then(
-        (m) => m.PublicPageModule
-      )
+      import('./pages/public/public-page.routes').then((m) => m.routes)
   },
   {
     path: publicRoutes.register.path,
     loadChildren: () =>
-      import('./pages/register/register-page.module').then(
-        (m) => m.RegisterPageModule
-      )
+      import('./pages/register/register-page.routes').then((m) => m.routes)
   },
   {
     path: publicRoutes.resources.path,
@@ -132,9 +126,7 @@ const routes: Routes = [
   {
     path: publicRoutes.start.path,
     loadChildren: () =>
-      import('./pages/landing/landing-page.module').then(
-        (m) => m.LandingPageModule
-      )
+      import('./pages/landing/landing-page.routes').then((m) => m.routes)
   },
   {
     loadComponent: () =>
@@ -147,7 +139,7 @@ const routes: Routes = [
   {
     path: internalRoutes.zen.path,
     loadChildren: () =>
-      import('./pages/zen/zen-page.module').then((m) => m.ZenPageModule)
+      import('./pages/zen/zen-page.routes').then((m) => m.routes)
   },
   {
     // wildcard, if requested url doesn't match any paths for routes defined
